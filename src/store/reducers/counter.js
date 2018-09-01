@@ -1,20 +1,29 @@
-import {ADD_COUNTER, SUBTRACT_COUNTER } from "../actionTypes";
+import { INCREMENT, DECREMENT, ADD_COUNTER, REMOVE_COUNTER } from "../actionTypes";
 
 // TODO: Could save someone's default state in our database, and fetch it on the initial component render.
-const DEFAULT_STATE = {
-  counter: 0
-};
+const DEFAULT_STATE = [{id: 0, count: 0}]
 
 export default (state = DEFAULT_STATE, action) => {
   switch(action.type) {
+    case INCREMENT:
+      return state.map((counter) => {
+        if (action.currentCounter.id === counter.id) {
+          return {...counter, count: action.currentCounter.count + 1}
+        }
+        return counter;
+      });
+    case DECREMENT:
+    return state.map((counter) => {
+      if (action.currentCounter.id === counter.id) {
+        return {...counter, count: action.currentCounter.count - 1}
+      }
+      return counter;
+    });
     case ADD_COUNTER:
-      let addOne = action.currentCounter + 1;
-      // debugger;
-      return {counter: addOne};
-    case SUBTRACT_COUNTER:
-      let subtractOne = action.currentCounter - 1;
-      // debugger;
-      return {counter: subtractOne}
+      return [...state, {id: state.length , count: 0}]
+    case REMOVE_COUNTER:
+      console.log([...state.slice(0, state.length - 1)])
+      return [...state.slice(0, state.length - 1)]
     default:
       return state;
   }

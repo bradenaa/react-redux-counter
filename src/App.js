@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CounterContainer from "./containers/CounterContainer"
+import CounterListContainer from "./containers/CounterListContainer"
 import { Provider } from 'react-redux';
 import { configureStore } from './store';
 
@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <CounterContainer />
+        <CounterListContainer />
       </Provider>
 
     );
